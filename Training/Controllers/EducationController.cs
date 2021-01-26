@@ -83,7 +83,6 @@ namespace Training.Controllers
                 myContext.Entry(get).State = EntityState.Modified;
                 var result = myContext.SaveChanges();
                 if (result <= 0)
-                    return View();
                 return RedirectToAction(nameof(Index));
                 return View();
             }
