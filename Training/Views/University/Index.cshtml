@@ -1,10 +1,10 @@
 ﻿@model IEnumerable<OverviewASPNetCore.Models.University>
 
-@{
+    @{
     ViewData["Title"] = "Index";
-}
+    }
 
-<h1>University</h1>
+    <h1>University</h1>
 
     <p>
         <a asp-action="Create">Create New</a>
@@ -24,18 +24,18 @@
         <tbody>
             @foreach (var item in Model)
             {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Name)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.IsAvailable)
-                    </td>
-                    <td>
-                        <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                        <a onclick="Delete(@item.Id)">Delete</a>
-                    </td>
-                </tr>
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IsAvailable)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a onclick="Delete(@item.Id)">Delete</a>
+                </td>
+            </tr>
             }
         </tbody>
     </table>
@@ -48,18 +48,18 @@
                 text: "You won't be able to revert this!",
                 icon: 'warning',
                 showCancelButton: true,
-                confirmButtonColor: '#3085d6',
+                comfirmButtonColor: '#3085d6',
                 cancelButtonColor: '#d33',
-                confirmButtonText: 'Yes, delete it!'
+                comfirmButtonText: 'Yes, delete it!'
             }).then((result) => {
-                if (result.IsConfirmed) {
+                if (result.isConfirmed) {
                     $.ajax({
                         url: "/University/Delete/",
                         data: { id: id }
                     }).done(function (data) {
                         if (data == 1) {
                             Swal.fire(
-                                'Delete',
+                                'Deleted!',
                                 'Your file has been deleted.',
                                 'success'
                             )
@@ -67,7 +67,7 @@
                         }
                     }).fail(function (data) {
                         console.log(data);
-                    });
+                    })
                 }
             })
         }

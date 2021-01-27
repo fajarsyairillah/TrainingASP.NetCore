@@ -25,22 +25,55 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.IsAvailable)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Education.Degree)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Account.NIK)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.NIK">Edit</a> |
-                <a asp-action="Delete" asp-route-id="@item.NIK">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IsAvailable)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Education.Degree)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Account.NIK)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.NIK">Edit</a> |
+                    <a onclick="Delete(@item.NIK)">Delete</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+<script>
+    function Delete(id) {
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            comfirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            comfirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    url: "/Profilling/Delete/",
+                    data: { id: id }
+                }).done(function (data) {
+                    if (data == 1) {
+                        Swal.fire(
+                            'Deleted!',
+                            'Your file has been deleted.',
+                            'success'
+                        )
+                        location.reload();
+                    }
+                }).fail(function (data) {
+                    console.log(data);
+                })
+            }
+        })
+    }
+</script>

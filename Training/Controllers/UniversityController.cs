@@ -79,15 +79,16 @@ namespace Training.Controllers
          public IActionResult Delete(int id)
         {
             var get = myContext.Universities.Find(id);
-            if(get !=null)
+            if(get != null)
             {
                 myContext.Universities.Remove(get);
                 var result = myContext.SaveChanges();
-                if (result > 0)
+                if(result > 0)
+                {
                     return Json(result);
+                }
             }
-            return View(id);
+            return Json(0);
         }
-        
     }
 }

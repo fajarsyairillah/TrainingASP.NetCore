@@ -100,10 +100,12 @@ namespace Training.Controllers
                 myContext.Profilings.Remove(get);
                 var result = myContext.SaveChanges();
                 if (result > 0)
+                {
                     return Json(result);
+                }
             }
-            return View(id);
+            return Json(0);
         }
-
     }
 }
+

@@ -97,10 +97,12 @@ namespace Training.Controllers
                 myContext.Educations.Remove(get);
                 var result = myContext.SaveChanges();
                 if (result > 0)
+                {
                     return Json(result);
+                }
             }
-            return View(id);
+            return Json(0);
         }
+    }
+}
 
-}
-}
